@@ -27,11 +27,13 @@ class StockScanner:
 
         while True:
 
+            page_number += 1
+
             # Used to compare to the scan_back_to_date to determine how far back to scan
             most_recent_scan_date = ''
 
             # Scrape the profit.ly page for the user and store it
-            web_page = "https://profit.ly/user/" + username + "/trades?page=" + str(page_number + 1) + "&size=10"
+            web_page = "https://profit.ly/user/" + username + "/trades?page=" + str(page_number) + "&size=10"
             page = requests.get(web_page)
 
             # Create the main soup
@@ -159,7 +161,7 @@ class StockScanner:
         current_year = datetime.datetime.now().year
 
         formatted_datetime = datetime.datetime(int(current_year), int(formatted_month), int(day), int(twenty_four_hour), int(minute))
-        print(f"\n*** FORMATTED DATE: {formatted_datetime} ***\n")
+        print(f"\n*** Scanning trade from: {formatted_datetime} ***")
         return formatted_datetime
 
 
